@@ -26,22 +26,16 @@ namespace sdds {
 		// Update the field width if necessary.
 		PairSummable(const K& key, const V& value = initial) : Pair <V, K>(key, value) {
 			// Determine if field width needs to be updated.
-			if (key.size() > minfield) {
+			auto keysize = key.size();
+			if (keysize > minfield) {
 				minfield = key.size();
 			}
 		}
 
-		//PairSummable(const K& key, const V& value = initial) : Pair<V, K>(key, value) {
-		//	auto count = key.size();
-		//	if (count > minwidth) {
-		//		minwidth = count;
-		//	}
-		//}
-
 		// Return true if the parameter has the same 'key' as the current object, false otherwise.
 		bool isCompatibleWith(const PairSummable<V, K>& b) const {
 			bool result;
-			this->key() == b.key ? result = true : result = false;
+			this->key() == b.key() ? result = true : result = false;
 			return result;
 		}
 
@@ -52,7 +46,7 @@ namespace sdds {
 			if (this->key() == param.key()) {
 				this->value() += param.value();
 			}
-			return this*;
+			return (*this);
 		}
 		
 		 // Override the 'display()' query to set the alighment to left and the field width to the value of the static attribute for all 'K' types, then call the base class version of 'display()' and finally restore the alignment to the right.
