@@ -42,9 +42,10 @@ namespace sdds {
 		// Overload the 'operator+=' to receive a reference to an unmodifiable 'PairSummable' object.
 		// This function adds the 'value' of the parameter object to the 'value' of the current object and returns a reference to the current object.
 		// Assumes that the current object and the parameter have the same key.
-		void operator+=(const PairSummable<V, K>& param) {
+		PairSummable& operator+=(const PairSummable<V, K>& param) {
 			if (this->key() == param.key()) {
-				this->value() += param.value();
+				PairSummable newpsum(this->key(), this->value() + param.value());
+				*this = newpsum;
 			}
 			return (*this);
 		}
@@ -54,7 +55,7 @@ namespace sdds {
 			 os.width(minfield);
 			 os << std::left;
 			 Pair<V, K>::display(os);
-			 os.wwidth(0);
+			 os.width(0);
 			 os << std::right;
 		 }
 

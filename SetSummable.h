@@ -5,7 +5,7 @@
 
 namespace sdds {
 
-	template <unsigned int N, class T, class K, class V>
+	template <unsigned int N, class T>
 	class SetSummable : public Set<N, T> {
 	
 	public:
