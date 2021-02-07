@@ -18,15 +18,6 @@ namespace sdds {
 				}
 			}
 			return accumulator;
-
-			//T accumulator;
-			//accumulator = T::getInitialValue();
-			//for (unsigned int i = 0; i < this->size(); i++) {
-			//	if (this->get(i) == filter) {
-			//		accumulator = this->get(i);
-			//	}
-			//}
-			//return accumulator;
 		}
 	};
 }
