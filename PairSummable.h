@@ -19,18 +19,25 @@ namespace sdds {
 		}
 
 		// Default constructor.
-		PairSummable() : Pair<V, K>{
+		PairSummable() {
 		}
 
 		//  Call the base class constructor passing the two parameters to it.
 		// Update the field width if necessary.
-		//PairSummable(const K& key, const V& value = initial) : Pair <V, K>(key, value) {
-		//	// Determine if field width needs to be updated.
-		//	if (key.size() > minfield) {
-		//		minfield = key.size();
+		PairSummable(const K& key, const V& value = initial) : Pair <V, K>(key, value) {
+			// Determine if field width needs to be updated.
+			if (key.size() > minfield) {
+				minfield = key.size();
+			}
+		}
+
+		//PairSummable(const K& key, const V& value = initial) : Pair<V, K>(key, value) {
+		//	auto count = key.size();
+		//	if (count > minwidth) {
+		//		minwidth = count;
 		//	}
 		//}
-		
+
 		// Return true if the parameter has the same 'key' as the current object, false otherwise.
 		bool isCompatibleWith(const PairSummable<V, K>& b) const {
 			bool result;
@@ -42,7 +49,10 @@ namespace sdds {
 		// This function adds the 'value' of the parameter object to the 'value' of the current object and returns a reference to the current object.
 		// Assumes that the current object and the parameter have the same key.
 		void operator+=(const PairSummable<V, K>& param) {
-			
+			if (this->key() == param.key()) {
+				this->value() += param.value();
+			}
+			return this*;
 		}
 		
 		 // Override the 'display()' query to set the alighment to left and the field width to the value of the static attribute for all 'K' types, then call the base class version of 'display()' and finally restore the alignment to the right.
