@@ -2,7 +2,7 @@
 #define SDDS_PAIR_H
 #include <iostream>
 // This module represents a family of value-key pairs.
-
+using namespace std;
 namespace sdds {
 	template <class V, class K>
 	class Pair {
@@ -30,12 +30,12 @@ namespace sdds {
 
 		// Inserts into stream 'os' the key and the value of the pair in the format:
 		// KEY : VALUE<endl>
-		virtual void display(std::ostream& os) const {
-			os << _key << " : " << _value << std::endl;
+		virtual void display(ostream& os) const {
+			os << _key << " : " << _value << endl;
 		}
 
 		// Calls the member 'display()' on 'pair' to insert a pair into stream 'os'.
-		friend std::ostream& operator<<(std::ostream& os, const Pair<V, K>& pair) {
+		friend ostream& operator<<(ostream& os, const Pair<V, K>& pair) {
 			pair.display(os);
 			return os;
 		}

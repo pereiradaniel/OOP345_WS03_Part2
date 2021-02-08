@@ -3,15 +3,12 @@
 #include <iostream>
 #include <cstring>
 #include "Pair.h"
-
+using namespace std;
 namespace sdds {
-
 	template <class V, class K>
 	class PairSummable : public Pair<V, K> {
-
 		static V initial;	// An object of type 'V ' that holds the initial value.
 		static size_t minfield;	// Holds the minimum field width for pretty columnar output.
-
 	public:
 		// Return initial value.
 		static const V& getInitialValue() {
@@ -51,23 +48,22 @@ namespace sdds {
 		}
 		
 		 // Override the 'display()' query to set the alighment to left and the field width to the value of the static attribute for all 'K' types, then call the base class version of 'display()' and finally restore the alignment to the right.
-		 virtual void display(std::ostream& os) const {
+		 virtual void display(ostream& os) const {
 			 os.width(minfield);
-			 os << std::left;
+			 os << left;
 			 Pair<V, K>::display(os);
 			 os.width(0);
-			 os << std::right;
+			 os << right;
 		 }
-
 	};
 
-	template<> std::string PairSummable<std::string, std::string>::initial = "";
-	template<> int PairSummable<int, std::string>::initial = 0;
+	template<> string PairSummable<string, string>::initial = "";
+	template<> int PairSummable<int, string>::initial = 0;
 	
 	//	PairSummable& operator+=(const PairSummable<V, K>& param) {
-	template<> PairSummable<std::string, std::string>& PairSummable<std::string, std::string>::operator+=(const PairSummable& param) {
+	template<> PairSummable<string, string>& PairSummable<string, string>::operator+=(const PairSummable& param) {
 		if (this->key() == param.key()) {
-			PairSummable newpsum(this->key(), this->value() + (value().compare("\0") ? ", " : "") + param.value());
+			PairSummable newpsum(this->key(), this->value() + (this->value().compare("\0") ? ", " : "") + param.value());
 			*this = newpsum;
 		}
 		return (*this);
@@ -75,6 +71,5 @@ namespace sdds {
 
 	template<typename V, typename K>
 	size_t PairSummable<V, K>::minfield = 0;
-
 }
 #endif
