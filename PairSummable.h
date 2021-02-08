@@ -67,15 +67,8 @@ namespace sdds {
 	//	PairSummable& operator+=(const PairSummable<V, K>& param) {
 	template<> PairSummable<std::string, std::string>& PairSummable<std::string, std::string>::operator+=(const PairSummable& param) {
 		if (this->key() == param.key()) {
-			if (value().compare("\0")) {
-				PairSummable newpsum(this->key(), this->value() + ", " + param.value());
-				*this = newpsum;
-			}
-			else {
-				PairSummable newpsum(this->key(), this->value()  + param.value());
-				*this = newpsum;
-			}
-
+			PairSummable newpsum(this->key(), this->value() + (value().compare("\0") ? ", " : "") + param.value());
+			*this = newpsum;
 		}
 		return (*this);
 	}
